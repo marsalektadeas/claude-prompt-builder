@@ -96,6 +96,17 @@ export const INTEGRATIONS = [
   'Webhook',
 ]
 
+export const SEO_OPTIONS = [
+  'Meta title a description',
+  'Open Graph (sdílení na sítích)',
+  'Sitemap.xml',
+  'Robots.txt',
+  'Strukturovaná data (schema.org)',
+  'URL struktura (SEO-friendly)',
+  'Optimalizace rychlosti (Core Web Vitals)',
+  'Alt texty obrázků',
+]
+
 export const DEFAULT_FORM = {
   projectName: '',
   websiteType: '',
@@ -115,5 +126,6 @@ export const DEFAULT_FORM = {
   backend: '',
   database: '',
   integrations: [],
+  seo: [],
   extraNotes: '',
 }

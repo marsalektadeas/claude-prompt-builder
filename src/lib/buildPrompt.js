@@ -18,6 +18,7 @@ export function buildPrompt(form) {
     backend,
     database,
     integrations,
+    seo,
     extraNotes,
   } = form
 
@@ -104,7 +105,16 @@ export function buildPrompt(form) {
     lines.push(`Integrace: ${integrations.join(', ')}`)
   lines.push('')
 
-  // 8. POŽADAVKY
+  // 8. SEO
+  lines.push('## SEO')
+  if (seo.length > 0) {
+    lines.push(seo.join(', '))
+  } else {
+    lines.push('Žádné speciální SEO požadavky nejsou definovány.')
+  }
+  lines.push('')
+
+  // 9. POŽADAVKY
   lines.push('## POŽADAVKY')
   lines.push('- Mobile-first design')
   lines.push('- Čisté, moderní UI')
