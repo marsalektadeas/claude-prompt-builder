@@ -72,6 +72,7 @@ export const FEATURES = [
 ]
 
 export const TECH_STACKS = [
+  'Nechat na Claudovi',
   'HTML/CSS/JS',
   'React',
   'Next.js + Tailwind',

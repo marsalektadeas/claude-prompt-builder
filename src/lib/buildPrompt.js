@@ -93,7 +93,13 @@ export function buildPrompt(form) {
 
   // 7. TECH STACK
   lines.push('## TECH STACK')
-  if (techStack) lines.push(`Stack: ${techStack}`)
+  if (techStack) {
+    if (techStack === 'Nechat na Claudovi') {
+      lines.push('Stack: Vyber nejvhodnější technologii sám na základě požadavků projektu.')
+    } else {
+      lines.push(`Stack: ${techStack}`)
+    }
+  }
   if (backend && backend !== 'Žádný') {
     lines.push(`Backend: ${backend}`)
     if (backend === 'Python backend') {
