@@ -106,6 +106,15 @@ export const SEO_OPTIONS = [
   'URL struktura (SEO-friendly)',
   'Optimalizace rychlosti (Core Web Vitals)',
   'Alt texty obrázků',
+  'Napojení na Google Search Console',
+]
+
+export const LEGAL_OPTIONS = [
+  'Cookies lišta (GDPR consent)',
+  'Privacy Policy (zásady ochrany osobních údajů)',
+  'Terms & Conditions (obchodní podmínky)',
+  'Cookies Policy',
+  'Správa souhlasů (consent management)',
 ]
 
 export const DEFAULT_FORM = {
@@ -128,5 +137,6 @@ export const DEFAULT_FORM = {
   database: '',
   integrations: [],
   seo: [],
+  legal: [],
   extraNotes: '',
 }

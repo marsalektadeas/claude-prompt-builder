@@ -19,6 +19,7 @@ export function buildPrompt(form) {
     database,
     integrations,
     seo,
+    legal,
     extraNotes,
   } = form
 
@@ -120,7 +121,16 @@ export function buildPrompt(form) {
   }
   lines.push('')
 
-  // 9. POŽADAVKY
+  // 9. PRÁVNÍ & COMPLIANCE
+  lines.push('## PRÁVNÍ & COMPLIANCE')
+  if (legal.length > 0) {
+    lines.push(legal.join(', '))
+  } else {
+    lines.push('Žádné právní požadavky nejsou definovány.')
+  }
+  lines.push('')
+
+  // 10. POŽADAVKY
   lines.push('## POŽADAVKY')
   lines.push('- Mobile-first design')
   lines.push('- Čisté, moderní UI')
