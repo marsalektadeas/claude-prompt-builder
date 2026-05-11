@@ -80,7 +80,7 @@ export const TECH_STACKS = [
   'Next.js + Tailwind + Supabase',
 ]
 
-export const BACKENDS = ['Žádný', 'Jednoduchý backend', 'Python backend']
+export const BACKENDS = ['Nechat na Claudovi', 'Žádný', 'Jednoduchý backend', 'Python backend']
 
 export const DATABASES = ['Žádná', 'Supabase', 'Firebase', 'Airtable', 'Jiná']
 
@@ -157,6 +157,21 @@ export const USER_FLOW_SCREENS = [
   'Chat / komunikace',
 ]
 
+export const DATA_ENTITY_HINTS = {
+  'Uživatel (User)': 'Záznamy o lidech používajících aplikaci — email, heslo, profil, nastavení.',
+  'Organizace / Firma': 'Skupina uživatelů pod jednou firmou. Typické pro B2B nebo multi-tenant aplikace.',
+  'Produkt / Položka': 'Co nabízíš nebo spravuješ — zboží v e-shopu, úkoly v task manageru, nemovitosti apod.',
+  'Objednávka / Transakce': 'Záznam o nákupu nebo platbě — co, kdy, za kolik a kdo objednal.',
+  'Dokument / Soubor': 'Nahrané soubory, PDF nebo obrázky které aplikace ukládá a spravuje.',
+  'Zpráva / Konverzace': 'Chat nebo komunikace mezi uživateli nebo se systémem.',
+  'Notifikace': 'Upozornění pro uživatele — in-app, email nebo push zprávy o dění v aplikaci.',
+  'Platba / Faktura': 'Finanční záznamy — vystavené faktury, stav platby, historie transakcí.',
+  'Kategorie / Tag': 'Štítky nebo skupiny pro organizaci jiných dat — kategorie produktů, tagy článků apod.',
+  'Role / Oprávnění': 'Definice co smí kdo dělat — admin, editor, viewer a jejich práva v aplikaci.',
+  'Log / Aktivita': 'Historie akcí v systému — kdo co kdy udělal. Slouží pro audit a debugging.',
+  'Nastavení (Settings)': 'Konfigurace aplikace nebo účtu — preference, notifikace, API klíče uživatele.',
+}
+
 export const DATA_ENTITIES = [
   'Uživatel (User)',
   'Organizace / Firma',
@@ -215,7 +230,7 @@ export const APP_FEATURES = [
 export const DEFAULT_APP_FORM = {
   projectName: '',
   projectDescription: '',
-  appType: '',
+  appType: [],
   appGoal: '',
   targetAudience: '',
   screens: [],

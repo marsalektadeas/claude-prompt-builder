@@ -32,7 +32,7 @@ export function buildPromptApp(form) {
   lines.push('## KONTEXT PROJEKTU')
   if (projectName) lines.push(`Název projektu: ${projectName}`)
   if (projectDescription) lines.push(`Popis: ${projectDescription}`)
-  if (appType) lines.push(`Typ aplikace: ${appType}`)
+  if (appType.length > 0) lines.push(`Typ aplikace: ${appType.join(', ')}`)
   if (appGoal) lines.push(`Obchodní cíl: ${appGoal}`)
   if (targetAudience) lines.push(`Cílová skupina: ${targetAudience}`)
   lines.push('')
@@ -94,9 +94,13 @@ export function buildPromptApp(form) {
     }
   }
   if (backend && backend !== 'Žádný') {
-    lines.push(`Backend: ${backend}`)
-    if (backend === 'Python backend') {
-      lines.push('Použij Python (FastAPI) pro backendovou logiku.')
+    if (backend === 'Nechat na Claudovi') {
+      lines.push('Backend: Vyber nejvhodnější backendové řešení sám na základě požadavků projektu.')
+    } else {
+      lines.push(`Backend: ${backend}`)
+      if (backend === 'Python backend') {
+        lines.push('Použij Python (FastAPI) pro backendovou logiku.')
+      }
     }
   }
   if (database && database !== 'Žádná') lines.push(`Databáze: ${database}`)

@@ -1,6 +1,6 @@
 import FormField from '../ui/FormField'
 import CheckboxGroup from '../ui/CheckboxGroup'
-import { DATA_ENTITIES } from '../../data/options'
+import { DATA_ENTITIES, DATA_ENTITY_HINTS } from '../../data/options'
 
 export default function SectionDataModel({ form, onChange }) {
   return (
@@ -12,6 +12,7 @@ export default function SectionDataModel({ form, onChange }) {
           options={DATA_ENTITIES}
           value={form.entities}
           onChange={(v) => onChange('entities', v)}
+          hints={DATA_ENTITY_HINTS}
         />
       </FormField>
 

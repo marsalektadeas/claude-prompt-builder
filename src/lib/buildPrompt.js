@@ -105,9 +105,13 @@ export function buildPrompt(form) {
     }
   }
   if (backend && backend !== 'Žádný') {
-    lines.push(`Backend: ${backend}`)
-    if (backend === 'Python backend') {
-      lines.push('Použij Python (FastAPI) pro backendovou logiku.')
+    if (backend === 'Nechat na Claudovi') {
+      lines.push('Backend: Vyber nejvhodnější backendové řešení sám na základě požadavků projektu.')
+    } else {
+      lines.push(`Backend: ${backend}`)
+      if (backend === 'Python backend') {
+        lines.push('Použij Python (FastAPI) pro backendovou logiku.')
+      }
     }
   }
   if (database && database !== 'Žádná') lines.push(`Databáze: ${database}`)

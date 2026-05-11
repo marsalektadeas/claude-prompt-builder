@@ -17,11 +17,13 @@ import SectionUserFlow from './components/form/SectionUserFlow'
 import SectionDataModel from './components/form/SectionDataModel'
 import SectionAuth from './components/form/SectionAuth'
 import SectionAppFeatures from './components/form/SectionAppFeatures'
+import LandingPage from './components/LandingPage'
 import PromptPreview from './components/PromptPreview'
 
 const LANDING_PAGE_SECTIONS = ['Hero', 'Výhody', 'Reference', 'FAQ', 'Kontaktní formulář', 'Stránka díků']
 
 export default function App() {
+  const [view, setView] = useState('landing')
   const [mode, setMode] = useState('web')
   const [webForm, setWebForm] = useState(DEFAULT_FORM)
   const [appForm, setAppForm] = useState(DEFAULT_APP_FORM)
@@ -49,10 +51,15 @@ export default function App() {
     setPrompt(mode === 'web' ? buildPrompt(form) : buildPromptApp(form))
   }, [form, mode])
 
+  if (view === 'landing') {
+    return <LandingPage onStart={() => setView('builder')} />
+  }
+
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
       <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-3">
+        <button onClick={() => setView('landing')} className="text-gray-400 hover:text-gray-600 transition-colors text-sm">←</button>
         <div className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
           <span className="text-white text-xs font-bold">C</span>
         </div>

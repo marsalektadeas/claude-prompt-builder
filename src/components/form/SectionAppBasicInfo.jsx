@@ -1,4 +1,5 @@
 import FormField from '../ui/FormField'
+import MultiSelectButtons from '../ui/MultiSelectButtons'
 import { APP_TYPES, APP_GOALS } from '../../data/options'
 
 export default function SectionAppBasicInfo({ form, onChange }) {
@@ -27,10 +28,11 @@ export default function SectionAppBasicInfo({ form, onChange }) {
       </FormField>
 
       <FormField label="Typ aplikace">
-        <select value={form.appType} onChange={(e) => onChange('appType', e.target.value)} className="input">
-          <option value="">Vyberte...</option>
-          {APP_TYPES.map((t) => <option key={t}>{t}</option>)}
-        </select>
+        <MultiSelectButtons
+          options={APP_TYPES}
+          value={form.appType}
+          onChange={(v) => onChange('appType', v)}
+        />
       </FormField>
 
       <FormField label="Obchodní cíl">
