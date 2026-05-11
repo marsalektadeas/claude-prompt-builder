@@ -9,6 +9,7 @@ import SectionTechStack from './components/form/SectionTechStack'
 import SectionIntegrations from './components/form/SectionIntegrations'
 import SectionSEO from './components/form/SectionSEO'
 import SectionLegal from './components/form/SectionLegal'
+import SectionSecurity from './components/form/SectionSecurity'
 import SectionExtraNotes from './components/form/SectionExtraNotes'
 import PromptPreview from './components/PromptPreview'
 
@@ -66,6 +67,8 @@ export default function App() {
             <SectionSEO form={form} onChange={handleChange} />
             <div className="border-t border-gray-100" />
             <SectionLegal form={form} onChange={handleChange} />
+            <div className="border-t border-gray-100" />
+            <SectionSecurity form={form} onChange={handleChange} />
             <div className="border-t border-gray-100" />
             <SectionExtraNotes form={form} onChange={handleChange} />
           </div>

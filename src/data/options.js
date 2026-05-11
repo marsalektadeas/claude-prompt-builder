@@ -117,6 +117,23 @@ export const LEGAL_OPTIONS = [
   'Správa souhlasů (consent management)',
 ]
 
+export const SECURITY_OPTIONS = [
+  'Autentizace uživatelů (login / registrace)',
+  'Role-based access control (RBAC)',
+  'Two-factor authentication (2FA)',
+  'Platební brána (Stripe, GoPay...)',
+  'PCI DSS compliance (platební bezpečnost)',
+  'Ochrana API klíčů (server-side only)',
+  'Row-Level Security (RLS databáze)',
+  'Rate limiting (ochrana endpointů)',
+  'CORS konfigurace',
+  'Content Security Policy (CSP)',
+  'Input validace & sanitizace',
+  'Šifrování citlivých dat',
+  'Audit log (záznam akcí)',
+  'DDoS / bot ochrana',
+]
+
 export const DEFAULT_FORM = {
   projectName: '',
   projectDescription: '',
@@ -139,5 +156,6 @@ export const DEFAULT_FORM = {
   integrations: [],
   seo: [],
   legal: [],
+  security: [],
   extraNotes: '',
 }

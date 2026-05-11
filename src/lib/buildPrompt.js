@@ -21,6 +21,7 @@ export function buildPrompt(form) {
     integrations,
     seo,
     legal,
+    security,
     extraNotes,
   } = form
 
@@ -140,7 +141,25 @@ export function buildPrompt(form) {
   lines.push('- Kód připravený pro produkci')
   lines.push('')
 
-  // 9. VÝSTUP
+  // 10. ZABEZPEČENÍ
+  lines.push('## ZABEZPEČENÍ')
+  if (security.length > 0) {
+    lines.push(security.join(', '))
+    if (security.includes('Platební brána (Stripe, GoPay...)')) {
+      lines.push('Poznámka: Implementuj platební bránu bezpečně — API klíče pouze server-side, webhook ověření podpisem.')
+    }
+    if (security.includes('Row-Level Security (RLS databáze)')) {
+      lines.push('Poznámka: Zapni RLS na všech tabulkách a definuj minimální potřebné politiky.')
+    }
+    if (security.includes('Ochrana API klíčů (server-side only)')) {
+      lines.push('Poznámka: Žádné API klíče ve frontend kódu ani env proměnných s VITE_/NEXT_PUBLIC_ prefixem.')
+    }
+  } else {
+    lines.push('Žádné speciální bezpečnostní požadavky nejsou definovány.')
+  }
+  lines.push('')
+
+  // 11. VÝSTUP
   lines.push('## VÝSTUP')
   lines.push('Prosím:')
   lines.push('1. Navrhni celkovou strukturu webu')
