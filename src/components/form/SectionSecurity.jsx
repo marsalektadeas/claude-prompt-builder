@@ -1,6 +1,6 @@
 import FormField from '../ui/FormField'
 import CheckboxGroup from '../ui/CheckboxGroup'
-import { SECURITY_OPTIONS } from '../../data/options'
+import { SECURITY_OPTIONS, SECURITY_HINTS } from '../../data/options'
 
 export default function SectionSecurity({ form, onChange }) {
   return (
@@ -12,6 +12,7 @@ export default function SectionSecurity({ form, onChange }) {
           options={SECURITY_OPTIONS}
           value={form.security}
           onChange={(v) => onChange('security', v)}
+          hints={SECURITY_HINTS}
         />
       </FormField>
     </div>

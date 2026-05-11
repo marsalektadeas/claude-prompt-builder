@@ -117,6 +117,23 @@ export const LEGAL_OPTIONS = [
   'Správa souhlasů (consent management)',
 ]
 
+export const SECURITY_HINTS = {
+  'Autentizace uživatelů (login / registrace)': 'Přihlašovací systém s účty — uživatel se zaregistruje, přihlásí a vidí jen svá data.',
+  'Role-based access control (RBAC)': 'Různá oprávnění pro různé role — např. admin vidí vše, běžný uživatel jen své věci.',
+  'Two-factor authentication (2FA)': 'Druhý krok ověření při přihlášení — SMS kód nebo authenticator appka pro vyšší bezpečnost.',
+  'Platební brána (Stripe, GoPay...)': 'Napojení na platební systém pro přijímání online plateb kartou nebo bankou.',
+  'PCI DSS compliance (platební bezpečnost)': 'Standard bezpečnosti pro weby zpracovávající platby — chrání data platebních karet.',
+  'Ochrana API klíčů (server-side only)': 'API klíče (pro AI, mapy, SMS...) musí být jen na serveru — nikdy ve frontend kódu.',
+  'Row-Level Security (RLS databáze)': 'Pravidla v databázi zajistí, že každý uživatel vidí jen svá data — i při úniku kódu.',
+  'Rate limiting (ochrana endpointů)': 'Omezení počtu požadavků za minutu — brání zneužití formulářů, přihlášení a API.',
+  'CORS konfigurace': 'Určení, které domény smí volat vaše API — zabraňuje požadavkům z neoprávněných webů.',
+  'Content Security Policy (CSP)': 'HTTP hlavička říkající prohlížeči, odkud smí načítat skripty — chrání před XSS útoky.',
+  'Input validace & sanitizace': 'Ověření a vyčištění všech dat od uživatele na serveru — prevence SQL injection a XSS.',
+  'Šifrování citlivých dat': 'Citlivé informace (hesla, osobní data) uložené šifrovaně — při úniku databáze jsou nečitelné.',
+  'Audit log (záznam akcí)': 'Záznam důležitých akcí v systému (kdo se přihlásil, co změnil) pro dohledatelnost.',
+  'DDoS / bot ochrana': 'Ochrana před automatizovanými útoky a boty — např. Cloudflare, reCAPTCHA nebo rate limiting.',
+}
+
 export const SECURITY_OPTIONS = [
   'Autentizace uživatelů (login / registrace)',
   'Role-based access control (RBAC)',
