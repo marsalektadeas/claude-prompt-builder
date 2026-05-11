@@ -117,6 +117,125 @@ export const LEGAL_OPTIONS = [
   'Správa souhlasů (consent management)',
 ]
 
+// ─── APP MODE OPTIONS ────────────────────────────────────────────────────────
+
+export const APP_TYPES = [
+  'SaaS (software as a service)',
+  'Interní nástroj / admin panel',
+  'Marketplace',
+  'E-commerce platforma',
+  'Dashboard / analytika',
+  'CRM / CMS',
+  'Mobilní aplikace (PWA)',
+  'Sociální síť / komunita',
+]
+
+export const APP_GOALS = [
+  'Automatizovat firemní procesy',
+  'Spravovat a vizualizovat data',
+  'Generovat příjmy (platby, předplatné)',
+  'Zlepšit komunikaci v týmu',
+  'Prodávat produkty nebo služby',
+  'Sledovat metriky a výkon',
+  'Budovat komunitu uživatelů',
+]
+
+export const USER_FLOW_SCREENS = [
+  'Onboarding / registrace',
+  'Přihlášení',
+  'Dashboard / přehled',
+  'Seznam / tabulka záznamů',
+  'Detail záznamu',
+  'Formulář pro vytvoření / editaci',
+  'Profil uživatele',
+  'Nastavení účtu',
+  'Notifikace',
+  'Platby / fakturace',
+  'Admin panel',
+  'Analytika / reporty',
+  'Vyhledávání / filtrování',
+  'Chat / komunikace',
+]
+
+export const DATA_ENTITIES = [
+  'Uživatel (User)',
+  'Organizace / Firma',
+  'Produkt / Položka',
+  'Objednávka / Transakce',
+  'Dokument / Soubor',
+  'Zpráva / Konverzace',
+  'Notifikace',
+  'Platba / Faktura',
+  'Kategorie / Tag',
+  'Role / Oprávnění',
+  'Log / Aktivita',
+  'Nastavení (Settings)',
+]
+
+export const AUTH_METHODS = [
+  'Email + heslo',
+  'Google OAuth',
+  'GitHub OAuth',
+  'Magic link (email)',
+  'SSO (enterprise)',
+  'Anonymní uživatel',
+]
+
+export const ROLE_OPTIONS = [
+  'Superadmin',
+  'Admin',
+  'Manager',
+  'Uživatel (User)',
+  'Viewer (jen čtení)',
+  'Guest / anonymní',
+]
+
+export const APP_FEATURES = [
+  'Dashboard s přehledy',
+  'Tabulka s filtrováním a řazením',
+  'CRUD operace (vytvoření, editace, smazání)',
+  'Fulltextové vyhledávání',
+  'Export (CSV, PDF)',
+  'Import dat',
+  'In-app notifikace',
+  'Email notifikace',
+  'Push notifikace',
+  'Real-time aktualizace (WebSocket)',
+  'Komentáře / diskuse',
+  'Nahrávání souborů',
+  'Platby a předplatné',
+  'Fakturace',
+  'Multi-tenant (více organizací)',
+  'Vícejazyčnost (i18n)',
+  'Dark mode',
+  'Audit log',
+  'API pro třetí strany (REST / GraphQL)',
+]
+
+export const DEFAULT_APP_FORM = {
+  projectName: '',
+  projectDescription: '',
+  appType: '',
+  appGoal: '',
+  targetAudience: '',
+  screens: [],
+  mainUserJourney: '',
+  entities: [],
+  dataModelNotes: '',
+  authMethods: [],
+  roles: [],
+  appFeatures: [],
+  techStack: '',
+  backend: '',
+  database: '',
+  integrations: [],
+  security: [],
+  legal: [],
+  extraNotes: '',
+}
+
+// ─── SECURITY ────────────────────────────────────────────────────────────────
+
 export const SECURITY_HINTS = {
   'Autentizace uživatelů (login / registrace)': 'Přihlašovací systém s účty — uživatel se zaregistruje, přihlásí a vidí jen svá data.',
   'Role-based access control (RBAC)': 'Různá oprávnění pro různé role — např. admin vidí vše, běžný uživatel jen své věci.',

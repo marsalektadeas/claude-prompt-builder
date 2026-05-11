@@ -1,12 +1,12 @@
 import FormField from '../ui/FormField'
 import { TECH_STACKS, BACKENDS, DATABASES } from '../../data/options'
 
-export default function SectionTechStack({ form, onChange }) {
-  const highlightDb = form.features.includes('Ukládání leadů')
+export default function SectionTechStack({ form, onChange, title = '5. Tech stack' }) {
+  const highlightDb = form.features?.includes('Ukládání leadů')
 
   return (
     <div className="flex flex-col gap-4">
-      <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">5. Tech stack</h2>
+      <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">{title}</h2>
 
       <FormField label="Stack">
         <select value={form.techStack} onChange={(e) => onChange('techStack', e.target.value)} className="input">
