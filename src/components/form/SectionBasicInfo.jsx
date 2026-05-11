@@ -16,6 +16,16 @@ export default function SectionBasicInfo({ form, onChange }) {
         />
       </FormField>
 
+      <FormField label="Popis projektu">
+        <textarea
+          value={form.projectDescription}
+          onChange={(e) => onChange('projectDescription', e.target.value)}
+          placeholder="Stručně popiš projekt, kontext, čím se firma zabývá, co je důležité..."
+          rows={3}
+          className="input resize-none"
+        />
+      </FormField>
+
       <FormField label="Typ webu">
         <select value={form.websiteType} onChange={(e) => onChange('websiteType', e.target.value)} className="input">
           <option value="">Vyberte...</option>

@@ -1,6 +1,7 @@
 export function buildPrompt(form) {
   const {
     projectName,
+    projectDescription,
     websiteType,
     goal,
     targetAudience,
@@ -35,6 +36,7 @@ export function buildPrompt(form) {
   // 2. KONTEXT PROJEKTU
   lines.push('## KONTEXT PROJEKTU')
   if (projectName) lines.push(`Název projektu: ${projectName}`)
+  if (projectDescription) lines.push(`Popis projektu: ${projectDescription}`)
   if (websiteType) lines.push(`Typ webu: ${websiteType}`)
   if (targetAudience) lines.push(`Cílová skupina: ${targetAudience}`)
   lines.push('')

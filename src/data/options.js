@@ -119,6 +119,7 @@ export const LEGAL_OPTIONS = [
 
 export const DEFAULT_FORM = {
   projectName: '',
+  projectDescription: '',
   websiteType: '',
   goal: '',
   targetAudience: '',
