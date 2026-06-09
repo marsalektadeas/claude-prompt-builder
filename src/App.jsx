@@ -1,5 +1,5 @@
-import { useState, useEffect } from 'react'
-import { DEFAULT_FORM, DEFAULT_APP_FORM, SECTIONS } from './data/options'
+import { useState, useEffect, useMemo } from 'react'
+import { DEFAULT_FORM, DEFAULT_APP_FORM } from './data/options'
 import { buildPrompt } from './lib/buildPrompt'
 import { buildPromptApp } from './lib/buildPromptApp'
 import SectionBasicInfo from './components/form/SectionBasicInfo'
@@ -22,11 +22,32 @@ import PromptPreview from './components/PromptPreview'
 
 const LANDING_PAGE_SECTIONS = ['Hero', 'Výhody', 'Reference', 'FAQ', 'Kontaktní formulář', 'Stránka díků']
 
+const STORAGE_KEY = 'cpb:state:v1'
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY)
+    if (!raw) return null
+    return JSON.parse(raw)
+  } catch {
+    return null
+  }
+}
+
+// Formulář má obsah, pokud se aspoň jedno pole liší od výchozího prázdného stavu
+function formHasContent(form) {
+  return Object.values(form).some((v) =>
+    Array.isArray(v) ? v.length > 0 : typeof v === 'string' && v.trim() !== '',
+  )
+}
+
 export default function App() {
+  const saved = loadState()
   const [view, setView] = useState('landing')
-  const [mode, setMode] = useState('web')
-  const [webForm, setWebForm] = useState(DEFAULT_FORM)
-  const [appForm, setAppForm] = useState(DEFAULT_APP_FORM)
+  const [mode, setMode] = useState(saved?.mode === 'app' ? 'app' : 'web')
+  const [webForm, setWebForm] = useState({ ...DEFAULT_FORM, ...(saved?.webForm || {}) })
+  const [appForm, setAppForm] = useState({ ...DEFAULT_APP_FORM, ...(saved?.appForm || {}) })
+  const [mobilePane, setMobilePane] = useState('form')
   const [prompt, setPrompt] = useState('')
 
   const form = mode === 'web' ? webForm : appForm
@@ -35,8 +56,13 @@ export default function App() {
   function handleChange(field, value) {
     setForm((prev) => {
       const next = { ...prev, [field]: value }
-      if (field === 'websiteType' && value === 'Landing page') {
-        next.sections = LANDING_PAGE_SECTIONS
+      if (field === 'websiteType') {
+        if (value === 'Landing page') {
+          next.sections = LANDING_PAGE_SECTIONS
+        } else if (prev.websiteType === 'Landing page') {
+          // Odchod z Landing page — zruš automaticky předvybrané sekce
+          next.sections = []
+        }
       }
       return next
     })
@@ -51,6 +77,17 @@ export default function App() {
     setPrompt(mode === 'web' ? buildPrompt(form) : buildPromptApp(form))
   }, [form, mode])
 
+  // Perzistence do localStorage
+  useEffect(() => {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify({ mode, webForm, appForm }))
+    } catch {
+      // localStorage nedostupný (např. privátní režim) — ignoruj
+    }
+  }, [mode, webForm, appForm])
+
+  const hasContent = useMemo(() => formHasContent(form), [form])
+
   if (view === 'landing') {
     return <LandingPage onStart={() => setView('builder')} />
   }
@@ -58,8 +95,12 @@ export default function App() {
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
       {/* Header */}
-      <header className="bg-white border-b border-gray-200 px-6 py-4 flex items-center gap-3">
-        <button onClick={() => setView('landing')} className="text-gray-400 hover:text-gray-600 transition-colors text-sm">←</button>
+      <header className="bg-white border-b border-gray-200 px-4 sm:px-6 py-4 flex items-center flex-wrap gap-3">
+        <button
+          onClick={() => setView('landing')}
+          aria-label="Zpět na úvodní stránku"
+          className="text-gray-400 hover:text-gray-600 transition-colors text-sm"
+        >←</button>
         <div className="w-7 h-7 rounded-lg bg-indigo-600 flex items-center justify-center">
           <span className="text-white text-xs font-bold">C</span>
         </div>
@@ -89,16 +130,44 @@ export default function App() {
           </button>
         </div>
 
-        <span className="text-xs text-gray-400 ml-1">
+        <span className="text-xs text-gray-400 ml-1 hidden sm:inline">
           {mode === 'web' ? 'pro generování webů' : 'pro generování aplikací'}
         </span>
       </header>
 
-      {/* Split layout */}
+      {/* Mobilní přepínač Formulář / Náhled (jen < lg) */}
+      <div className="lg:hidden flex border-b border-gray-200 bg-white">
+        <button
+          onClick={() => setMobilePane('form')}
+          className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
+            mobilePane === 'form'
+              ? 'text-indigo-600 border-b-2 border-indigo-600'
+              : 'text-gray-500'
+          }`}
+        >
+          Formulář
+        </button>
+        <button
+          onClick={() => setMobilePane('preview')}
+          className={`flex-1 py-2.5 text-sm font-medium transition-colors ${
+            mobilePane === 'preview'
+              ? 'text-indigo-600 border-b-2 border-indigo-600'
+              : 'text-gray-500'
+          }`}
+        >
+          Náhled promptu
+        </button>
+      </div>
+
+      {/* Split layout — na mobilu jeden panel přes taby, na lg+ vedle sebe */}
       <div className="flex flex-1 overflow-hidden">
         {/* LEFT: Form */}
-        <div className="w-1/2 overflow-y-auto border-r border-gray-200 bg-white">
-          <div className="p-6 flex flex-col gap-8">
+        <div
+          className={`w-full lg:w-1/2 overflow-y-auto border-r border-gray-200 bg-white ${
+            mobilePane === 'form' ? 'block' : 'hidden'
+          } lg:block`}
+        >
+          <div className="p-4 sm:p-6 flex flex-col gap-8">
             {mode === 'web' ? (
               <>
                 <SectionBasicInfo form={form} onChange={handleChange} />
@@ -148,8 +217,12 @@ export default function App() {
         </div>
 
         {/* RIGHT: Preview */}
-        <div className="w-1/2 overflow-y-auto bg-gray-50 p-6">
-          <PromptPreview prompt={prompt} />
+        <div
+          className={`w-full lg:w-1/2 overflow-y-auto bg-gray-50 p-4 sm:p-6 ${
+            mobilePane === 'preview' ? 'block' : 'hidden'
+          } lg:block`}
+        >
+          <PromptPreview prompt={prompt} hasContent={hasContent} />
         </div>
       </div>
     </div>

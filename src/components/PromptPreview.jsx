@@ -1,6 +1,6 @@
 import { useState } from 'react'
 
-export default function PromptPreview({ prompt }) {
+export default function PromptPreview({ prompt, hasContent }) {
   const [copied, setCopied] = useState(false)
 
   function handleCopy() {
@@ -10,7 +10,7 @@ export default function PromptPreview({ prompt }) {
     })
   }
 
-  const isEmpty = prompt.trim().length < 50
+  const isEmpty = !hasContent
 
   return (
     <div className="flex flex-col h-full gap-3">
