@@ -1,3 +1,16 @@
+const GOAL_INSTRUCTIONS = {
+  'Generovat leady':
+    'Zaměř se na: silné CTA, optimalizaci formulářů, prvky důvěry, mobile-first design, sledování odeslání formuláře.',
+  'Prezentovat firmu':
+    'Zaměř se na: jasnou prezentaci hodnot a příběhu firmy, profesionální vizuál, reference a důkazy důvěryhodnosti.',
+  'Získat poptávky':
+    'Zaměř se na: jednoduchý poptávkový formulář, viditelné kontaktní údaje, jasnou nabídku a CTA opakované v celé stránce.',
+  'Rezervovat konzultaci':
+    'Zaměř se na: rezervační/kalendářní flow, odstranění tření v procesu, připomenutí hodnoty konzultace a social proof.',
+  'Budovat důvěru':
+    'Zaměř se na: reference, case studies, certifikace, transparentnost a konzistentní profesionální tón.',
+}
+
 export function buildPrompt(form) {
   const {
     projectName,
@@ -6,7 +19,9 @@ export function buildPrompt(form) {
     goal,
     targetAudience,
     mainCta,
+    outputLanguage,
     textSource,
+    toneOfVoice,
     images,
     logo,
     styles,
@@ -46,10 +61,8 @@ export function buildPrompt(form) {
   lines.push('## CÍL')
   if (goal) {
     lines.push(`Obchodní cíl: ${goal}`)
-    if (goal === 'Generovat leady') {
-      lines.push(
-        'Zaměř se na: silné CTA, optimalizaci formulářů, prvky důvěry, mobile-first design, sledování odeslání formuláře.',
-      )
+    if (GOAL_INSTRUCTIONS[goal]) {
+      lines.push(GOAL_INSTRUCTIONS[goal])
     }
   }
   if (mainCta) lines.push(`Hlavní CTA: ${mainCta}`)
@@ -57,6 +70,9 @@ export function buildPrompt(form) {
 
   // 4. DESIGN & OBSAH
   lines.push('## DESIGN & OBSAH')
+  if (outputLanguage)
+    lines.push(`Jazyk webu: ${outputLanguage} — veškeré texty na webu piš v tomto jazyce.`)
+  if (toneOfVoice.length > 0) lines.push(`Tón komunikace: ${toneOfVoice.join(', ')}`)
   if (styles.length > 0) lines.push(`Styl: ${styles.join(', ')}`)
   if (colorPreference) lines.push(`Barevné preference: ${colorPreference}`)
   if (textSource) {
@@ -64,6 +80,10 @@ export function buildPrompt(form) {
     if (textSource === 'Generovat s AI') {
       lines.push(
         'Vygeneruj veškeré texty v odpovídajícím tónu zaměřeném na konverzi.',
+      )
+    } else if (textSource === 'Kombinace') {
+      lines.push(
+        'Část textů dodá klient, zbytek vygeneruj v odpovídajícím tónu zaměřeném na konverzi a jasně označ, které části jsi doplnil.',
       )
     }
   }
@@ -117,6 +137,33 @@ export function buildPrompt(form) {
   if (database && database !== 'Žádná') lines.push(`Databáze: ${database}`)
   if (integrations.length > 0)
     lines.push(`Integrace: ${integrations.join(', ')}`)
+
+  // Kontrola konzistence tech stacku, backendu a dat
+  const needsPersistence =
+    features.includes('Ukládání leadů') ||
+    features.includes('CMS / admin') ||
+    features.includes('Rezervační systém') ||
+    features.includes('Newsletter')
+  if (needsPersistence && techStack === 'HTML/CSS/JS') {
+    lines.push(
+      'Upozornění na konzistenci: Vybrané funkce vyžadují ukládání dat, ale tech stack je statický (HTML/CSS/JS). Doplň serverless funkce + databázi nebo zvol robustnější stack.',
+    )
+  }
+  if (needsPersistence && backend === 'Žádný') {
+    lines.push(
+      'Upozornění na konzistenci: Vybrané funkce vyžadují ukládání dat, ale backend je nastaven na "Žádný". Zvol vhodný backend nebo BaaS (např. Supabase).',
+    )
+  }
+  if (
+    techStack.includes('Supabase') &&
+    database &&
+    database !== 'Žádná' &&
+    database !== 'Supabase'
+  ) {
+    lines.push(
+      `Upozornění na konzistenci: Tech stack počítá se Supabase, ale jako databáze je zvolena ${database}. Sjednoť na jednom řešení.`,
+    )
+  }
   lines.push('')
 
   // 8. SEO
@@ -145,7 +192,7 @@ export function buildPrompt(form) {
   lines.push('- Kód připravený pro produkci')
   lines.push('')
 
-  // 10. ZABEZPEČENÍ
+  // 11. ZABEZPEČENÍ
   lines.push('## ZABEZPEČENÍ')
   if (security.length > 0) {
     lines.push(security.join(', '))
@@ -163,7 +210,7 @@ export function buildPrompt(form) {
   }
   lines.push('')
 
-  // 11. VÝSTUP
+  // 12. VÝSTUP
   lines.push('## VÝSTUP')
   lines.push('Prosím:')
   lines.push('1. Navrhni celkovou strukturu webu')

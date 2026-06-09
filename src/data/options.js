@@ -20,6 +20,24 @@ export const TEXT_SOURCES = [
   'Kombinace',
 ]
 
+export const OUTPUT_LANGUAGES = [
+  'Čeština',
+  'Slovenština',
+  'Angličtina',
+  'Němčina',
+]
+
+export const TONE_OF_VOICE = [
+  'Profesionální',
+  'Přátelský',
+  'Sebevědomý',
+  'Hravý',
+  'Inspirativní',
+  'Věcný / minimalistický',
+  'Luxusní / exkluzivní',
+  'Empatický',
+]
+
 export const IMAGE_OPTIONS = [
   'Dodá klient',
   'Generováno AI',
@@ -292,7 +310,9 @@ export const DEFAULT_FORM = {
   goal: '',
   targetAudience: '',
   mainCta: '',
+  outputLanguage: '',
   textSource: '',
+  toneOfVoice: [],
   images: '',
   logo: '',
   styles: [],
