@@ -17,6 +17,7 @@ import SectionUserFlow from './components/form/SectionUserFlow'
 import SectionDataModel from './components/form/SectionDataModel'
 import SectionAuth from './components/form/SectionAuth'
 import SectionAppFeatures from './components/form/SectionAppFeatures'
+import SectionMcp from './components/form/SectionMcp'
 import LandingPage from './components/LandingPage'
 import PromptPreview from './components/PromptPreview'
 
@@ -182,6 +183,8 @@ export default function App() {
                 <div className="border-t border-gray-100" />
                 <SectionIntegrations form={form} onChange={handleChange} />
                 <div className="border-t border-gray-100" />
+                <SectionMcp form={form} onChange={handleChange} title="7. Napojení na nástroje (MCP)" />
+                <div className="border-t border-gray-100" />
                 <SectionSEO form={form} onChange={handleChange} />
                 <div className="border-t border-gray-100" />
                 <SectionLegal form={form} onChange={handleChange} />
@@ -206,11 +209,13 @@ export default function App() {
                 <div className="border-t border-gray-100" />
                 <SectionIntegrations form={form} onChange={handleChange} title="7. Integrace" />
                 <div className="border-t border-gray-100" />
-                <SectionSecurity form={form} onChange={handleChange} title="8. Zabezpečení" />
+                <SectionMcp form={form} onChange={handleChange} title="8. Napojení na nástroje (MCP)" />
                 <div className="border-t border-gray-100" />
-                <SectionLegal form={form} onChange={handleChange} title="9. Právní & compliance" />
+                <SectionSecurity form={form} onChange={handleChange} title="9. Zabezpečení" />
                 <div className="border-t border-gray-100" />
-                <SectionExtraNotes form={form} onChange={handleChange} title="10. Poznámky" />
+                <SectionLegal form={form} onChange={handleChange} title="10. Právní & compliance" />
+                <div className="border-t border-gray-100" />
+                <SectionExtraNotes form={form} onChange={handleChange} title="11. Poznámky" />
               </>
             )}
           </div>

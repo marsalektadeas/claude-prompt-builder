@@ -1,3 +1,10 @@
+import {
+  QUALITY_BAR,
+  CONVERSION_COPY,
+  ANTI_PATTERNS,
+  buildMcpBlock,
+} from './promptShared'
+
 const GOAL_INSTRUCTIONS = {
   'Generovat leady':
     'Zaměř se na: silné CTA, optimalizaci formulářů, prvky důvěry, mobile-first design, sledování odeslání formuláře.',
@@ -45,7 +52,10 @@ export function buildPrompt(form) {
   // 1. ROLE
   lines.push('## ROLE')
   lines.push(
-    'Jsi senior webový designer, UX designer a frontend developer.',
+    'Jsi senior webový designer, UX designer a frontend developer. Stavíš weby, ' +
+      'které vypadají profesionálně a převádějí návštěvníky na zákazníky. ' +
+      'Řídíš se principy z Refactoring UI (vizuální hierarchie, spacing, typografie) ' +
+      'a Don\'t Make Me Think (srozumitelnost a bezbariérový flow).',
   )
   lines.push('')
 
@@ -184,12 +194,12 @@ export function buildPrompt(form) {
   }
   lines.push('')
 
-  // 10. POŽADAVKY
-  lines.push('## POŽADAVKY')
-  lines.push('- Mobile-first design')
-  lines.push('- Čisté, moderní UI')
-  lines.push('- Zaměřeno na konverzi')
-  lines.push('- Kód připravený pro produkci')
+  // 10. KVALITNÍ LAŤKA + KONVERZE + ANTI-PATTERNY
+  lines.push(...QUALITY_BAR)
+  lines.push('')
+  lines.push(...CONVERSION_COPY)
+  lines.push('')
+  lines.push(...ANTI_PATTERNS)
   lines.push('')
 
   // 11. ZABEZPEČENÍ
@@ -210,7 +220,11 @@ export function buildPrompt(form) {
   }
   lines.push('')
 
-  // 12. VÝSTUP
+  // 12. MCP / DESIGN ZDROJE (jen když je něco vybráno)
+  const mcpBlock = buildMcpBlock(form)
+  if (mcpBlock.length > 0) lines.push(...mcpBlock)
+
+  // 13. VÝSTUP
   lines.push('## VÝSTUP')
   lines.push('Prosím:')
   lines.push('1. Navrhni celkovou strukturu webu')
