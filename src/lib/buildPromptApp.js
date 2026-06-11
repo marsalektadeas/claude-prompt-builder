@@ -1,3 +1,5 @@
+import { QUALITY_BAR, ANTI_PATTERNS, buildMcpBlock } from './promptShared'
+
 export function buildPromptApp(form) {
   const {
     projectName,
@@ -25,7 +27,11 @@ export function buildPromptApp(form) {
 
   // 1. ROLE
   lines.push('## ROLE')
-  lines.push('Jsi senior full-stack developer a software architect.')
+  lines.push(
+    'Jsi senior full-stack developer a software architect. Stavíš aplikace s čistou ' +
+      'architekturou, bezpečnou prací s daty a promyšleným UX. Řídíš se principy ' +
+      'Clean Code a Don\'t Make Me Think a preferuješ nejjednodušší řešení, které splní cíl.',
+  )
   lines.push('')
 
   // 2. KONTEXT PROJEKTU
@@ -137,12 +143,21 @@ export function buildPromptApp(form) {
   // 10. POŽADAVKY
   lines.push('## POŽADAVKY')
   lines.push('- Čistý, modulární kód připravený pro produkci')
-  lines.push('- Responzivní UI (mobile-friendly)')
   lines.push('- Bezpečné zacházení s daty uživatelů')
   lines.push('- Jasná struktura projektu a pojmenování')
   lines.push('')
 
-  // 11. VÝSTUP
+  // 11. KVALITNÍ LAŤKA + ANTI-PATTERNY
+  lines.push(...QUALITY_BAR)
+  lines.push('')
+  lines.push(...ANTI_PATTERNS)
+  lines.push('')
+
+  // 12. MCP / DESIGN ZDROJE (jen když je něco vybráno)
+  const mcpBlock = buildMcpBlock(form)
+  if (mcpBlock.length > 0) lines.push(...mcpBlock)
+
+  // 13. VÝSTUP
   lines.push('## VÝSTUP')
   lines.push('Prosím:')
   lines.push('1. Navrhni architekturu aplikace a strukturu projektu')

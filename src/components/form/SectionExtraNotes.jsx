@@ -1,6 +1,6 @@
 import FormField from '../ui/FormField'
 
-export default function SectionExtraNotes({ form, onChange, title = '10. Poznámky' }) {
+export default function SectionExtraNotes({ form, onChange, title = '11. Poznámky' }) {
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-xs font-semibold uppercase tracking-widest text-gray-400">{title}</h2>

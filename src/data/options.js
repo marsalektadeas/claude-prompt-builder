@@ -264,6 +264,8 @@ export const DEFAULT_APP_FORM = {
   integrations: [],
   security: [],
   legal: [],
+  mcpIntegrations: [],
+  figmaUrl: '',
   extraNotes: '',
 }
 
@@ -285,6 +287,51 @@ export const SECURITY_HINTS = {
   'Audit log (záznam akcí)': 'Záznam důležitých akcí v systému (kdo se přihlásil, co změnil) pro dohledatelnost.',
   'DDoS / bot ochrana': 'Ochrana před automatizovanými útoky a boty — např. Cloudflare, reCAPTCHA nebo rate limiting.',
 }
+
+// ─── MCP INTEGRACE ───────────────────────────────────────────────────────────
+// Živé nástroje, které si uživatel připojí ve svém Claude klientovi.
+// Nejde o volbu technologie produktu (to řeší Tech stack / Databáze), ale o to,
+// s čím Claude umí pracovat během stavby.
+
+export const MCP_INTEGRATIONS = [
+  {
+    id: 'figma',
+    label: 'Figma (Dev Mode MCP)',
+    description: 'Claude si přečte tvůj Figma design a postaví UI přesně podle něj.',
+    needsUrl: true,
+    urlLabel: 'Odkaz na Figma soubor nebo frame',
+    urlPlaceholder: 'https://www.figma.com/file/…',
+    setupHint: 'Vyžaduje připojený Figma Dev Mode MCP server v tvém Claude klientovi.',
+  },
+  {
+    id: 'supabase',
+    label: 'Supabase MCP',
+    description: 'Claude přímo zakládá tabulky, migrace a RLS politiky v tvém Supabase projektu.',
+    needsUrl: false,
+    setupHint: 'Vyžaduje připojený Supabase MCP server s přístupem k tvému projektu.',
+  },
+  {
+    id: 'context7',
+    label: 'Context7 MCP',
+    description: 'Claude si stáhne aktuální dokumentaci knihoven — méně zastaralého kódu.',
+    needsUrl: false,
+    setupHint: 'Vyžaduje připojený Context7 MCP server.',
+  },
+  {
+    id: 'github',
+    label: 'GitHub MCP',
+    description: 'Claude pracuje přímo s repem — větve, commity, PR, issues, soubory.',
+    needsUrl: false,
+    setupHint: 'Vyžaduje připojený GitHub MCP server s přístupem k tvému repozitáři.',
+  },
+  {
+    id: 'vercel',
+    label: 'Vercel MCP',
+    description: 'Claude řeší deploy, čte logy a spravuje projekt a env proměnné na Vercelu.',
+    needsUrl: false,
+    setupHint: 'Vyžaduje připojený Vercel MCP server propojený s tvým účtem.',
+  },
+]
 
 export const SECURITY_OPTIONS = [
   'Autentizace uživatelů (login / registrace)',
@@ -328,5 +375,7 @@ export const DEFAULT_FORM = {
   seo: [],
   legal: [],
   security: [],
+  mcpIntegrations: [],
+  figmaUrl: '',
   extraNotes: '',
 }
